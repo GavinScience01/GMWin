@@ -1,0 +1,66 @@
+#include "GMWin.h"
+#include "GMWindow.h"
+#include "GMStorage.h"
+
+//RENDERING AND UPDATING
+///<summary>
+///Renders all windows, no need for update call
+///</summary>
+void GMWin::Render() {
+	Update();
+	std::vector<GMWindow*>* windows = GMStorage::getInstance().getWindowStack();
+	for (std::vector<GMWindow*>::iterator it = windows->begin(); it != windows->end(); it++) {
+		(*it)->render();
+	}
+}
+
+void GMWin::Update() {
+	std::vector<GMWindow*>* windows = GMStorage::getInstance().getWindowStack();
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		for (std::vector<GMWindow*>::iterator it = windows->begin(); it != windows->end(); it++) {
+			(*it)->update(e);
+		}
+	}
+	GMStorage::getInstance().remove();
+}
+
+//WINDOW HANDLING
+void GMWin::Init(SDL_Renderer* renderer) {
+	GMStorage::getInstance().setRenderer(renderer);
+	GMUtils::setColor(255, 255, 255, 255);
+}
+
+void GMWin::Begin(const char* title, GMWindowFlags flags) {
+	GMWindow* window = new GMWindow(title, flags);
+	GMStorage::getInstance().pushWindow(window);
+}
+
+void GMWin::End() {
+	GMStorage::getInstance().endWindow();
+}
+
+//COMPONENT ADDING
+void GMWin::AddText(std::string label, const char* name, int x, int y) {
+	GMWindow* window = GMStorage::getInstance().currentWindow();
+	GMTextComponent* comp = new GMTextComponent(x, y + window->nextY, name, label);
+	window->addComponent(comp);
+}
+
+//VARIABLE CHANGING
+void GMWin::setPos(int x, int y) {
+	GMStorage::getInstance().currentWindow()->posX = x;
+	GMStorage::getInstance().currentWindow()->posY = y;
+}
+
+void GMWin::setSize(int x, int y) {
+	GMStorage::getInstance().currentWindow()->sizeX = x;
+	GMStorage::getInstance().currentWindow()->sizeY = y;
+}
+
+//TEST WINDOWS
+void GMWin::TestingWindow() {
+	GMWin::Begin("Testing Window");
+	GMWin::AddText("Hello World!", "hi");
+	GMWin::End();
+}
