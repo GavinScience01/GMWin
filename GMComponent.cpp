@@ -51,8 +51,19 @@ void GMFloatGridComponent::render(int xOffset, int yOffset) {
 		for (int i = 0; i < sizeX; i++) {
 			float f = grid[i][j];
 			GMUtils::setColor(f * 255, f * 255, f * 255, 255);
-			GMUtils::renderRect(i * 20, j * 20, 20, 20);
+			GMUtils::renderRect((i * 20) + x + xOffset, (j * 20) + y + yOffset, 20, 20);
 		}
 	}
-	GMUtils::renderText(label.c_str(), x + xOffset + (sizeX * 20), y + yOffset + (sizeY * 10));
+	GMUtils::renderText(label.c_str(), x + xOffset + (sizeX * 20) + 10, y + yOffset + (sizeY * 10) - 7);
+}
+
+
+//DYNAMIC TEXT
+GMDynamicTextComponent::GMDynamicTextComponent(int x, int y, const char* name, std::string* pLabel) : GMComponent(x, y, name) {
+	this->pLabel = pLabel;
+	this->height = 13;
+}
+
+void GMDynamicTextComponent::render(int xOffset, int yOffset) {
+	GMUtils::renderText(pLabel->c_str(), x + xOffset, y + yOffset);
 }

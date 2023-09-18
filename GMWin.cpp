@@ -72,11 +72,17 @@ void GMWin::setSize(int x, int y) {
 
 //TEST WINDOWS
 void GMWin::TestingWindow() {
-	float grid[2][2] = { {.5, .25}, {.25, .5} };
+	float** grid = new float*[2];
+	for (int i = 0; i < 2; i++) {
+		grid[i] = new float[2];
+		grid[i][0] = .25;
+		grid[i][1] = .5;
+	}
+
 
 	GMWin::Begin("Testing Window");
 	GMWin::AddText("Hello World!", "hi");
 	GMWin::AddCheck(false, "This is a checkbox", "check");
-	GMWin::AddFloatMatrix(&grid, 2, 2, "MNIST Mini", "mnist");
+	GMWin::AddFloatMatrix(grid, 2, 2, "MNIST Mini", "mnist");
 	GMWin::End();
 }

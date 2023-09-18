@@ -42,3 +42,10 @@ public:
 	int sizeY;
 	void render(int xOffset, int yOffset);
 };
+
+class GMDynamicTextComponent : public GMComponent {
+public:
+	GMDynamicTextComponent(int x, int y, const char* name, std::string* pLabel);
+	std::string* pLabel;
+	void render(int xOffset, int yOffset);
+};

@@ -88,7 +88,12 @@ void GMWindow::mouseEvent(const SDL_MouseMotionEvent& e) {
 		}
 		//TODO: fix flipping window when gone too much
 		else if (inGrabber(e.x, e.y)) {
-			sizeX += e.xrel;
+			if (sizeX + e.xrel > GRABBER_SIZE) {
+				sizeX += e.xrel;
+			}
+			else {
+				posX += e.xrel;
+			}
 			sizeY += e.yrel;
 		}
 	}
