@@ -47,6 +47,18 @@ void GMWin::AddText(std::string label, const char* name, int x, int y) {
 	window->addComponent(comp);
 }
 
+void GMWin::AddCheck(bool checked, std::string label, const char* name, int x, int y) {
+	GMWindow* window = GMStorage::getInstance().currentWindow();
+	GMCheckComponent* comp = new GMCheckComponent(x, y + window->nextY, name, checked, label);
+	window->addComponent(comp);
+}
+
+void GMWin::AddFloatMatrix(float** grid, int sizeX, int sizeY, std::string label, const char* name, int x, int y) {
+	GMWindow* window = GMStorage::getInstance().currentWindow();
+	GMFloatGridComponent* comp = new GMFloatGridComponent(x, y + window->nextY, name, grid, sizeX, sizeY, label);
+	window->addComponent(comp);
+}
+
 //VARIABLE CHANGING
 void GMWin::setPos(int x, int y) {
 	GMStorage::getInstance().currentWindow()->posX = x;
@@ -60,7 +72,11 @@ void GMWin::setSize(int x, int y) {
 
 //TEST WINDOWS
 void GMWin::TestingWindow() {
+	float grid[2][2] = { {.5, .25}, {.25, .5} };
+
 	GMWin::Begin("Testing Window");
 	GMWin::AddText("Hello World!", "hi");
+	GMWin::AddCheck(false, "This is a checkbox", "check");
+	GMWin::AddFloatMatrix(&grid, 2, 2, "MNIST Mini", "mnist");
 	GMWin::End();
 }

@@ -1,2 +1,2 @@
 # GMWin
-Simple SDL Window Library
+Simple SDL Window Library for C++ based off ImGUI

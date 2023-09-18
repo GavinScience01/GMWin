@@ -10,10 +10,9 @@ public:
 	int x, y;
 	int width, height;
 	const char* name;
+	std::string label;
 
 	virtual void render(int xOffset, int yOffset)=0;
-private:
-	SDL_Renderer* renderer;
 };
 
 class GMSuperComponent : public GMComponent {
@@ -24,7 +23,22 @@ public:
 
 class GMTextComponent : public GMComponent {
 public:
-	GMTextComponent(int x, int y, const char* name, std::string text);
-	std::string label;
+	GMTextComponent(int x, int y, const char* name, std::string label);
+	void render(int xOffset, int yOffset);
+};
+
+class GMCheckComponent : public GMComponent {
+public:
+	GMCheckComponent(int x, int y, const char* name, bool checked, std::string label);
+	bool checked;
+	void render(int xOffset, int yOffset);
+};
+
+class GMFloatGridComponent : public GMComponent {
+public:
+	GMFloatGridComponent(int x, int y, const char* name, float** grid, int sizeX, int sizeY, std::string label);
+	float** grid;
+	int sizeX;
+	int sizeY;
 	void render(int xOffset, int yOffset);
 };

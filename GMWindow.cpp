@@ -14,7 +14,7 @@ GMWindow::GMWindow(const char* title, GMWindowFlags flags) {
 	sizeY = 200;
 	condensed = false;
 
-	nextY += BAR_DEPTH;
+	nextY += BAR_DEPTH + COMP_PADDING;
 }
 
 void GMWindow::render() {
@@ -54,10 +54,10 @@ void GMWindow::render() {
 	GMUtils::renderLine(posX + sizeX - 6, posY + 6, posX + sizeX - BAR_DEPTH + 6, posY + BAR_DEPTH - 6);
 	GMUtils::renderLine(posX + sizeX - 6, posY + BAR_DEPTH - 6, posX + sizeX - BAR_DEPTH + 6, posY + 6);
 
-	//render comps
+	//render comps, adds a slight x bias
 	if (!condensed) {
 		for (GMComponent* comp : components) {
-			comp->render(posX, posY);
+			comp->render(posX+COMP_PADDING, posY);
 		}
 	}
 }
@@ -129,7 +129,8 @@ void GMWindow::textEvent(const SDL_TextInputEvent& e) {
 }
 
 void GMWindow::addComponent(GMComponent* comp) {
-	components.push_back(comp);
+	components.insert(components.begin(), comp);
+	nextY += comp->height + COMP_PADDING;
 }
 
 void GMWindow::removeComponent(GMComponent* comp) {
