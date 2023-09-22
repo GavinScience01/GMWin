@@ -49,3 +49,11 @@ public:
 	std::string* pLabel;
 	void render(int xOffset, int yOffset);
 };
+
+class GMButtonComponent : public GMComponent {
+public:
+	GMButtonComponent(int x, int y, const char* name, std::string buttonText, std::string label);
+	std::string buttonText;
+	std::string label;
+	void render(int xOffset, int yOffset);
+};

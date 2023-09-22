@@ -80,6 +80,7 @@ void GMWindow::update(const SDL_Event& e) {
 	}
 }
 
+//TODO IMPORTANT: find a way to only select top window
 void GMWindow::mouseEvent(const SDL_MouseMotionEvent& e) {
 	if (GMStorage::getInstance().getMousePressed()) {
 		if (inWindowBar(e.x, e.y)) {

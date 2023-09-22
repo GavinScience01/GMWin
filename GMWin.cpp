@@ -25,6 +25,7 @@ void GMWin::Update() {
 	GMStorage::getInstance().remove();
 }
 
+
 //WINDOW HANDLING
 void GMWin::Init(SDL_Renderer* renderer) {
 	GMStorage::getInstance().setRenderer(renderer);
@@ -39,6 +40,7 @@ void GMWin::Begin(const char* title, GMWindowFlags flags) {
 void GMWin::End() {
 	GMStorage::getInstance().endWindow();
 }
+
 
 //COMPONENT ADDING
 void GMWin::AddText(std::string label, const char* name, int x, int y) {
@@ -59,6 +61,13 @@ void GMWin::AddFloatMatrix(float** grid, int sizeX, int sizeY, std::string label
 	window->addComponent(comp);
 }
 
+void GMWin::AddDynamicText(std::string* pLabel, const char* name, int x, int y) {
+	GMWindow* window = GMStorage::getInstance().currentWindow();
+	GMDynamicTextComponent* comp = new GMDynamicTextComponent(x, y + window->nextY, name, pLabel);
+	window->addComponent(comp);
+}
+
+
 //VARIABLE CHANGING
 void GMWin::setPos(int x, int y) {
 	GMStorage::getInstance().currentWindow()->posX = x;
@@ -69,6 +78,7 @@ void GMWin::setSize(int x, int y) {
 	GMStorage::getInstance().currentWindow()->sizeX = x;
 	GMStorage::getInstance().currentWindow()->sizeY = y;
 }
+
 
 //TEST WINDOWS
 void GMWin::TestingWindow() {
