@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 #include "GMStorage.h"
 
@@ -6,6 +7,7 @@ GMStorage::GMStorage() {
 	renderer = NULL;
 	window = NULL;
 	mousePressed = false;
+	selected = nullptr;
 
 	font = TTF_OpenFont("ProggyClean.ttf", 18);
 	if (font == NULL) {
@@ -24,6 +26,7 @@ void GMStorage::setRenderer(SDL_Renderer* renderer) {
 void GMStorage::pushWindow(GMWindow* window) {
 	windowStack.push_back(window);
 	this->window = window;
+	this->selected = window;
 }
 
 GMWindow* GMStorage::getWindow(const char* title) {
@@ -52,12 +55,13 @@ void GMStorage::queueRemove(GMWindow* win) {
 	deleteStack.push_back(win);
 }
 
-void GMStorage::remove() {
+void GMStorage::updateStacks() {
 	int index = deleteStack.size();
 	while (deleteStack.size() > 0 && index >= 0) {
 		for (int i = 0; i < windowStack.size(); i++) {
 			if (windowStack[i] == deleteStack.back()) {
 				windowStack.erase(windowStack.begin() + i);
+				if (selected == deleteStack.back()) selected = nullptr;
 				deleteStack.pop_back();
 				index--;
 				break;
@@ -85,4 +89,16 @@ void GMStorage::changeFontSize(int size) {
 	if (font == NULL) {
 		printf("Font failed to load! SDL_ttf error: %s\n", TTF_GetError());
 	}
+}
+
+void GMStorage::selectWindow(GMWindow* selected) {
+	this->selected = selected;
+	std::vector<GMWindow*>::iterator it = std::find(windowStack.begin(), windowStack.end(), selected);
+	windowStack[it - windowStack.begin()] = windowStack.back();
+	windowStack[windowStack.size() - 1] = selected;
+
+}
+
+GMWindow* GMStorage::getSelected() {
+	return selected;
 }

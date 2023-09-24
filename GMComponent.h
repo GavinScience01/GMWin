@@ -12,7 +12,8 @@ public:
 	const char* name;
 	std::string label;
 
-	virtual void render(int xOffset, int yOffset)=0;
+	virtual void render(int xOffset, int yOffset) = 0;
+	virtual void update(SDL_Event e) = 0;
 };
 
 class GMSuperComponent : public GMComponent {
@@ -25,6 +26,7 @@ class GMTextComponent : public GMComponent {
 public:
 	GMTextComponent(int x, int y, const char* name, std::string label);
 	void render(int xOffset, int yOffset);
+	void update(SDL_Event e) {}
 };
 
 class GMCheckComponent : public GMComponent {
@@ -32,6 +34,7 @@ public:
 	GMCheckComponent(int x, int y, const char* name, bool checked, std::string label);
 	bool checked;
 	void render(int xOffset, int yOffset);
+	void update(SDL_Event e);
 };
 
 class GMFloatGridComponent : public GMComponent {
@@ -41,6 +44,7 @@ public:
 	int sizeX;
 	int sizeY;
 	void render(int xOffset, int yOffset);
+	void update(SDL_Event e) {}
 };
 
 class GMDynamicTextComponent : public GMComponent {
@@ -48,6 +52,7 @@ public:
 	GMDynamicTextComponent(int x, int y, const char* name, std::string* pLabel);
 	std::string* pLabel;
 	void render(int xOffset, int yOffset);
+	void update(SDL_Event e) {}
 };
 
 class GMButtonComponent : public GMComponent {
@@ -56,4 +61,5 @@ public:
 	std::string buttonText;
 	std::string label;
 	void render(int xOffset, int yOffset);
+	void update(SDL_Event e);
 };

@@ -36,6 +36,10 @@ void GMCheckComponent::render(int xOffset, int yOffset) {
 	GMUtils::renderText(label.c_str(), x + xOffset + 40, y + yOffset + 10);
 }
 
+void GMCheckComponent::update(SDL_Event e) {
+
+}
+
 
 //FLOAT MATRIX
 GMFloatGridComponent::GMFloatGridComponent(int x, int y, const char* name, float** grid, int sizeX, int sizeY, std::string label) : GMComponent(x, y, name) {
@@ -77,4 +81,8 @@ GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string
 
 void GMButtonComponent::render(int xOffset, int yOffset) {
 	//TODO: this, add hover color, and rounded rect to utils
+}
+
+void GMButtonComponent::update(SDL_Event e) {
+
 }

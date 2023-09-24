@@ -2,6 +2,8 @@
 #include "GMWindow.h"
 #include "GMStorage.h"
 
+#include <iostream>
+
 //RENDERING AND UPDATING
 ///<summary>
 ///Renders all windows, no need for update call
@@ -18,11 +20,28 @@ void GMWin::Update() {
 	std::vector<GMWindow*>* windows = GMStorage::getInstance().getWindowStack();
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
-		for (std::vector<GMWindow*>::iterator it = windows->begin(); it != windows->end(); it++) {
-			(*it)->update(e);
+		if (GMStorage::getInstance().getSelected() != nullptr) {
+			GMStorage::getInstance().getSelected()->update(e);
 		}
+
+		if (e.type == SDL_MOUSEBUTTONDOWN) {
+			for (std::vector<GMWindow*>::reverse_iterator it = windows->rbegin(); it != windows->rend(); it++) {
+				GMWindow* window = *it;
+				int x = e.button.x - window->posX;
+				int y = e.button.y - window->posY;
+
+				if ((x >= 0 && x <= window->sizeX) && (y >= 0 && y <= window->sizeY)) {
+					GMStorage::getInstance().selectWindow(window);
+					GMStorage::getInstance().updateStacks();
+					return;
+				}
+			}
+		}
+		/*for (std::vector<GMWindow*>::iterator it = windows->begin(); it != windows->end(); it++) {
+			(*it)->update(e);
+		}*/
 	}
-	GMStorage::getInstance().remove();
+	GMStorage::getInstance().updateStacks();
 }
 
 

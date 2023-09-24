@@ -28,19 +28,23 @@ public:
 	std::vector<GMWindow*>* getWindowStack();
 	void endWindow();
 	void queueRemove(GMWindow* win);
-	void remove();
+	void updateStacks();
 
 	bool getMousePressed();
 	void setMousePressed(bool pressed);
 
 	TTF_Font* getFont();
 	void changeFontSize(int size);
+
+	void selectWindow(GMWindow* selected);
+	GMWindow* getSelected();
 	
 private:
 	std::vector<GMWindow*> windowStack;
 	std::vector<GMWindow*> deleteStack;
 	SDL_Renderer* renderer;
 	GMWindow* window;
+	GMWindow* selected;
 	bool mousePressed;
 	TTF_Font* font;
 };
