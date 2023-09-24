@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>F:\Projects\GMWin\GMWin\SDL2_ttf\include;F:\Projects\GMWin\GMWin\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>F:\Projects\GMWin\GMWin\SDL2_ttf\include;$(ProjectDir)\include;F:\Projects\GMWin\GMWin\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>F:\Projects\GMWin\GMWin\SDL2_ttf\lib\x86;F:\Projects\GMWin\GMWin\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,19 +134,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GMComponent.cpp" />
-    <ClCompile Include="GMStorage.cpp" />
-    <ClCompile Include="GMUtils.cpp" />
-    <ClCompile Include="GMWin.cpp" />
-    <ClCompile Include="GMWindow.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\GMComponent.cpp" />
+    <ClCompile Include="src\GMStorage.cpp" />
+    <ClCompile Include="src\GMUtils.cpp" />
+    <ClCompile Include="src\GMWin.cpp" />
+    <ClCompile Include="src\GMWindow.cpp" />
+    <ClCompile Include="tests\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GMComponent.h" />
-    <ClInclude Include="GMStorage.h" />
-    <ClInclude Include="GMUtils.h" />
-    <ClInclude Include="GMWin.h" />
-    <ClInclude Include="GMWindow.h" />
+    <ClInclude Include="include\GMComponent.h" />
+    <ClInclude Include="include\GMStorage.h" />
+    <ClInclude Include="include\GMUtils.h" />
+    <ClInclude Include="include\GMWin.h" />
+    <ClInclude Include="include\GMWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />

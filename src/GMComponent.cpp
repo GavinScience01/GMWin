@@ -27,7 +27,7 @@ void GMTextComponent::render(int xOffset, int yOffset) {
 GMCheckComponent::GMCheckComponent(int x, int y, const char* name, bool checked, std::string label) : GMComponent(x, y, name) {
 	this->checked = checked;
 	this->label = label;
-	this->height = 50;
+	this->height = 30;
 }
 
 void GMCheckComponent::render(int xOffset, int yOffset) {

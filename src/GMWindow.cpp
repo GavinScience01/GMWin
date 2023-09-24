@@ -18,7 +18,7 @@ GMWindow::GMWindow(const char* title, GMWindowFlags flags) {
 }
 
 void GMWindow::render() {
-	//TODO: possibly add rounded rects?
+	//TODO: add scroll bars and clipping for too many components
 
 	//window
 	GMUtils::setColor(0, 10, 50, 255);
@@ -55,9 +55,14 @@ void GMWindow::render() {
 	GMUtils::renderLine(posX + sizeX - 6, posY + BAR_DEPTH - 6, posX + sizeX - BAR_DEPTH + 6, posY + 6);
 
 	//render comps, adds a slight x bias
+	//currently stops rendering when a component doesn't fit in the window, will be changed to create a scroll
 	if (!condensed) {
+		int height = BAR_DEPTH;
 		for (GMComponent* comp : components) {
-			comp->render(posX+COMP_PADDING, posY);
+			height += comp->height + COMP_PADDING;
+			if (sizeY >= height) {
+				comp->render(posX + COMP_PADDING, posY);
+			}
 		}
 	}
 }
@@ -135,7 +140,7 @@ void GMWindow::textEvent(const SDL_TextInputEvent& e) {
 }
 
 void GMWindow::addComponent(GMComponent* comp) {
-	components.insert(components.begin(), comp);
+	components.push_back(comp);
 	nextY += comp->height + COMP_PADDING;
 }
 

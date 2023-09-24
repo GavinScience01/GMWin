@@ -15,39 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GMUtils.cpp">
+    <ClCompile Include="src\GMUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GMWin.cpp">
+    <ClCompile Include="src\GMWin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GMStorage.cpp">
+    <ClCompile Include="src\GMStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GMWindow.cpp">
+    <ClCompile Include="src\GMWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GMComponent.cpp">
+    <ClCompile Include="src\GMComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GMWin.h">
+    <ClInclude Include="include\GMWin.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GMWindow.h">
+    <ClInclude Include="include\GMWindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GMUtils.h">
+    <ClInclude Include="include\GMUtils.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GMStorage.h">
+    <ClInclude Include="include\GMStorage.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GMComponent.h">
+    <ClInclude Include="include\GMComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

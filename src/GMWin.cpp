@@ -100,7 +100,7 @@ void GMWin::setSize(int x, int y) {
 
 
 //TEST WINDOWS
-void GMWin::TestingWindow() {
+void GMWin::TestingWindow(std::string* pLabel) {
 	float** grid = new float*[2];
 	for (int i = 0; i < 2; i++) {
 		grid[i] = new float[2];
@@ -108,10 +108,10 @@ void GMWin::TestingWindow() {
 		grid[i][1] = .5;
 	}
 
-
 	GMWin::Begin("Testing Window");
 	GMWin::AddText("Hello World!", "hi");
 	GMWin::AddCheck(false, "This is a checkbox", "check");
 	GMWin::AddFloatMatrix(grid, 2, 2, "MNIST Mini", "mnist");
+	GMWin::AddDynamicText(pLabel, "height");
 	GMWin::End();
 }

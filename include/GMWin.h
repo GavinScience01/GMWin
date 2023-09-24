@@ -24,11 +24,11 @@ namespace GMWin {
 	void AddText(std::string label, const char* name, int x = 0, int y = 0);
 	void AddCheck(bool checked, std::string label, const char* name, int x = 0, int y = 0);
 	void AddFloatMatrix(float** grid, int sizeX, int sizeY, std::string label, const char* name, int x = 0, int y = 0);
-	void AddDynamicText(std::string* pLabel, const char* name, int x, int y);
+	void AddDynamicText(std::string* pLabel, const char* name, int x = 0, int y = 0);
 
 	void setPos(int posX, int posY);
 	void setSize(int sizeX, int sizeY);
 
-	void TestingWindow();
+	void TestingWindow(std::string* pLabel);
 
 }

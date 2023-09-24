@@ -7,7 +7,7 @@
 int constexpr BAR_DEPTH = 22;
 int constexpr GRABBER_SIZE = 30;
 
-int constexpr COMP_PADDING = 5;
+int constexpr COMP_PADDING = 10;
 
 class GMWindow {
 public:
