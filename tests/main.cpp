@@ -23,7 +23,7 @@ int main(int argc, char* args[]) {
 
 	std::string label;
 
-	GMWin::Init(renderer);
+	GMWin::Init(window, renderer);
 	GMWin::TestingWindow(&label);
 
 	while (1) {

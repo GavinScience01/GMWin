@@ -67,7 +67,7 @@ void GMWindow::render() {
 		int height = GMUtils::BAR_DEPTH;
 		for (GMComponent* comp : components) {
 			height += comp->height + GMUtils::COMP_PADDING;
-			if (sizeY >= height) {
+			if (sizeY >= height && sizeX >= comp->width) {
 				comp->render(posX + GMUtils::COMP_PADDING, posY);
 			}
 		}
@@ -101,8 +101,16 @@ void GMWindow::update(const SDL_Event& e) {
 void GMWindow::mouseEvent(const SDL_MouseMotionEvent& e) {
 	if (GMStorage::getInstance().getMousePressed()) {
 		if (inWindowBar(e.x, e.y)) {
-			posX += e.xrel;
-			posY += e.yrel;
+			int w;
+			int h;
+			SDL_GetWindowSize(GMStorage::getInstance().getWindow(), &w, &h);
+
+			if (posX + e.xrel >= 0 && posX + e.xrel <= w - GMUtils::BAR_DEPTH) {
+				posX += e.xrel;
+			}
+			if (posY + e.yrel >= 0 && posY + e.yrel <= h - GMUtils::BAR_DEPTH) {
+				posY += e.yrel;
+			}
 		}
 		else if (inGrabber(e.x, e.y)) {
 			if (sizeX + e.xrel > GMUtils::GRABBER_SIZE) {

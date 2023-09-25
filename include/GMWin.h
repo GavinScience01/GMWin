@@ -14,7 +14,7 @@ enum GMWindowFlags_ {
 
 namespace GMWin {
 
-	void Init(SDL_Renderer* renderer);
+	void Init(SDL_Window* window, SDL_Renderer* renderer);
 	void Begin(const char* title, GMWindowFlags flags = 0);
 	void End();
 

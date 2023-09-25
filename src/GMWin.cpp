@@ -46,8 +46,9 @@ void GMWin::Update() {
 
 
 //WINDOW HANDLING
-void GMWin::Init(SDL_Renderer* renderer) {
+void GMWin::Init(SDL_Window* window, SDL_Renderer* renderer) {
 	GMStorage::getInstance().setRenderer(renderer);
+	GMStorage::getInstance().setWindow(window);
 	GMUtils::setColor(255, 255, 255, 255);
 }
 

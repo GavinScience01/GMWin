@@ -38,11 +38,15 @@ public:
 
 	void selectWindow(GMWindow* selected);
 	GMWindow* getSelected();
+
+	void setWindow(SDL_Window* window);
+	SDL_Window* getWindow();
 	
 private:
 	std::vector<GMWindow*> windowStack;
 	std::vector<GMWindow*> deleteStack;
 	SDL_Renderer* renderer;
+	SDL_Window* sdlWindow;
 	GMWindow* window;
 	GMWindow* selected;
 	bool mousePressed;

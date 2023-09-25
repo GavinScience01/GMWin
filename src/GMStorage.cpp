@@ -102,3 +102,11 @@ void GMStorage::selectWindow(GMWindow* selected) {
 GMWindow* GMStorage::getSelected() {
 	return selected;
 }
+
+void GMStorage::setWindow(SDL_Window* window) {
+	this->sdlWindow = window;
+}
+
+SDL_Window* GMStorage::getWindow() {
+	return sdlWindow;
+}
