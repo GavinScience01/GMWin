@@ -67,7 +67,7 @@ void GMWindow::render() {
 		int height = GMUtils::BAR_DEPTH;
 		for (GMComponent* comp : components) {
 			height += comp->height + GMUtils::COMP_PADDING;
-			if (sizeY >= height && sizeX >= comp->width) {
+			if (sizeY >= height && sizeX >= comp->width + GMUtils::COMP_PADDING) {
 				comp->render(posX + GMUtils::COMP_PADDING, posY);
 			}
 		}

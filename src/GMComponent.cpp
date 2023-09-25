@@ -15,6 +15,7 @@ GMComponent::GMComponent(int x, int y, const char* name) {
 //TEXT
 GMTextComponent::GMTextComponent(int x, int y, const char* name, std::string label) : GMComponent(x, y, name) {
 	this->label = label;
+	this->width = label.size() * 8;
 	this->height = 13;
 }
 
@@ -27,6 +28,7 @@ void GMTextComponent::render(int xOffset, int yOffset) {
 GMCheckComponent::GMCheckComponent(int x, int y, const char* name, bool checked, std::string label) : GMComponent(x, y, name) {
 	this->checked = checked;
 	this->label = label;
+	this->width = 40 + label.size() * 8;
 	this->height = 30;
 }
 
@@ -59,6 +61,7 @@ GMFloatGridComponent::GMFloatGridComponent(int x, int y, const char* name, float
 	this->label = label;
 	this->sizeX = sizeX;
 	this->sizeY = sizeY;
+	this->width = (sizeX * 20) + 10 + label.size() * 8;
 	this->height = 20 * sizeY;
 }
 
@@ -82,6 +85,8 @@ GMDynamicTextComponent::GMDynamicTextComponent(int x, int y, const char* name, s
 
 void GMDynamicTextComponent::render(int xOffset, int yOffset) {
 	GMUtils::renderText(pLabel->c_str(), x + xOffset, y + yOffset);
+	//needs to be adjusted based on text updates
+	this->width = pLabel->size() * 8;
 }
 
 
@@ -89,6 +94,7 @@ void GMDynamicTextComponent::render(int xOffset, int yOffset) {
 GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string buttonText, std::string label) : GMComponent(x, y, name) {
 	this->buttonText = buttonText;
 	this->label = label;
+	//TODO: width calc
 	this->height = 13 * 2;
 }
 
