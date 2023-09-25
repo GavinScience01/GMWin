@@ -4,13 +4,9 @@
 #include "GMUtils.h"
 #include "GMComponent.h"
 
-int constexpr BAR_DEPTH = 22;
-int constexpr GRABBER_SIZE = 30;
-
-int constexpr COMP_PADDING = 10;
-
 class GMWindow {
 public:
+
 	GMWindow(const char* title, GMWindowFlags flags);
 	~GMWindow();
 

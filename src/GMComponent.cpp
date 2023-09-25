@@ -34,10 +34,22 @@ void GMCheckComponent::render(int xOffset, int yOffset) {
 	GMUtils::setColor(20, 40, 70, 255);
 	GMUtils::renderRect(x + xOffset, y + yOffset, 30, 30);
 	GMUtils::renderText(label.c_str(), x + xOffset + 40, y + yOffset + 10);
+
+	if (checked) {
+		GMUtils::renderImage(x + xOffset + 5, y + yOffset + 5, 20, 20, "images/check.bmp");
+	}
 }
 
-void GMCheckComponent::update(SDL_Event e) {
+//TODO: migrate this so not all components have to calculate position
+void GMCheckComponent::update(SDL_Event e, int xOffset, int yOffset) {
+	if (e.type == SDL_MOUSEBUTTONDOWN) {
+		int rx = e.button.x - xOffset;
+		int ry = e.button.y - yOffset;
 
+		if (rx >= GMUtils::COMP_PADDING && rx <= 30 + GMUtils::COMP_PADDING && ry >= GMUtils::COMP_PADDING && ry <= 30 + GMUtils::COMP_PADDING) {
+			checked = !checked;
+		}
+	}
 }
 
 
@@ -84,6 +96,6 @@ void GMButtonComponent::render(int xOffset, int yOffset) {
 	//TODO: this, add hover color, and rounded rect to utils
 }
 
-void GMButtonComponent::update(SDL_Event e) {
+void GMButtonComponent::update(SDL_Event e, int xOffset, int yOffset) {
 
 }

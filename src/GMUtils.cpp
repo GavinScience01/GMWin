@@ -65,6 +65,27 @@ void GMUtils::renderText(const char* text, int x, int y) {
 }
 
 ///<summary>
+///Draws an image at the file location to the xy coordinates
+///</summary>
+void GMUtils::renderImage(int x, int y, int w, int h, const char* file) {
+	SDL_Surface* image = SDL_LoadBMP(file);
+	if (image == NULL) {
+		printf("Unable to load image! SDL Error: %s\n", SDL_GetError());
+	}
+
+	SDL_Texture* imageTex = SDL_CreateTextureFromSurface(GMStorage::getInstance().getRenderer(), image);
+	SDL_Rect rect;
+	rect.x = x;
+	rect.y = y;
+	rect.w = w;
+	rect.h = h;
+
+	SDL_RenderCopy(GMStorage::getInstance().getRenderer(), imageTex, NULL, &rect);
+	SDL_FreeSurface(image);
+	SDL_DestroyTexture(imageTex);
+}
+
+///<summary>
 ///Calculates the area of a rectangle
 ///</summary>
 double GMUtils::triArea(int x1, int y1, int x2, int y2, int x3, int y3) {

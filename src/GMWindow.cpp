@@ -14,7 +14,7 @@ GMWindow::GMWindow(const char* title, GMWindowFlags flags) {
 	sizeY = 200;
 	condensed = false;
 
-	nextY += BAR_DEPTH + COMP_PADDING;
+	nextY = GMUtils::BAR_DEPTH + GMUtils::COMP_PADDING;
 }
 
 GMWindow::~GMWindow() {
@@ -29,17 +29,17 @@ void GMWindow::render() {
 
 	//window
 	GMUtils::setColor(0, 10, 50, 255);
-	GMUtils::renderRect(posX, posY+BAR_DEPTH, sizeX, sizeY-BAR_DEPTH);
+	GMUtils::renderRect(posX, posY + GMUtils::BAR_DEPTH, sizeX, sizeY - GMUtils::BAR_DEPTH);
 
 	//grab bar, only visible if not condensed
 	//TODO: change hover color
 	if (!condensed) {
-		GMUtils::renderTriangle(posX + sizeX - GRABBER_SIZE, posY + sizeY, posX + sizeX, posY + sizeY - GRABBER_SIZE, 30, 60, 90, 255);
+		GMUtils::renderTriangle(posX + sizeX - GMUtils::GRABBER_SIZE, posY + sizeY, posX + sizeX, posY + sizeY - GMUtils::GRABBER_SIZE, 30, 60, 90, 255);
 	}
 
 	//window bar
 	GMUtils::setColor(25, 75, 150, 255);
-	GMUtils::renderRect(posX, posY, sizeX, BAR_DEPTH);
+	GMUtils::renderRect(posX, posY, sizeX, GMUtils::BAR_DEPTH);
 	GMUtils::renderText(title, posX+25, posY+4);
 
 	//arrow, add lerp to closing? may be too slow
@@ -58,17 +58,17 @@ void GMWindow::render() {
 
 	//close, mostly random ish until I got the size right
 	GMUtils::setColor(255, 255, 255, 255);
-	GMUtils::renderLine(posX + sizeX - 6, posY + 6, posX + sizeX - BAR_DEPTH + 6, posY + BAR_DEPTH - 6);
-	GMUtils::renderLine(posX + sizeX - 6, posY + BAR_DEPTH - 6, posX + sizeX - BAR_DEPTH + 6, posY + 6);
+	GMUtils::renderLine(posX + sizeX - 6, posY + 6, posX + sizeX - GMUtils::BAR_DEPTH + 6, posY + GMUtils::BAR_DEPTH - 6);
+	GMUtils::renderLine(posX + sizeX - 6, posY + GMUtils::BAR_DEPTH - 6, posX + sizeX - GMUtils::BAR_DEPTH + 6, posY + 6);
 
 	//render comps, adds a slight x bias
 	//currently stops rendering when a component doesn't fit in the window, will be changed to create a scroll
 	if (!condensed) {
-		int height = BAR_DEPTH;
+		int height = GMUtils::BAR_DEPTH;
 		for (GMComponent* comp : components) {
-			height += comp->height + COMP_PADDING;
+			height += comp->height + GMUtils::COMP_PADDING;
 			if (sizeY >= height) {
-				comp->render(posX + COMP_PADDING, posY);
+				comp->render(posX + GMUtils::COMP_PADDING, posY);
 			}
 		}
 	}
@@ -90,18 +90,22 @@ void GMWindow::update(const SDL_Event& e) {
 	else if (e.type == SDL_TEXTINPUT) {
 		textEvent(e.text);
 	}
+
+	int height = GMUtils::BAR_DEPTH;
+	for (GMComponent* comp : components) {
+		height += GMUtils::COMP_PADDING;
+		comp->update(e, posX, posY + height);
+	}
 }
 
-//TODO IMPORTANT: find a way to only select top window
 void GMWindow::mouseEvent(const SDL_MouseMotionEvent& e) {
 	if (GMStorage::getInstance().getMousePressed()) {
 		if (inWindowBar(e.x, e.y)) {
 			posX += e.xrel;
 			posY += e.yrel;
 		}
-		//TODO: fix flipping window when gone too much
 		else if (inGrabber(e.x, e.y)) {
-			if (sizeX + e.xrel > GRABBER_SIZE) {
+			if (sizeX + e.xrel > GMUtils::GRABBER_SIZE) {
 				sizeX += e.xrel;
 			}
 			else {
@@ -124,7 +128,7 @@ void GMWindow::clickEvent(const SDL_MouseButtonEvent& e) {
 			else {
 				condensed = true;
 				prevSize = sizeY;
-				sizeY = BAR_DEPTH;
+				sizeY = GMUtils::BAR_DEPTH;
 			}
 		}
 		else if (inCloser(e.x, e.y)) {
@@ -148,7 +152,7 @@ void GMWindow::textEvent(const SDL_TextInputEvent& e) {
 
 void GMWindow::addComponent(GMComponent* comp) {
 	components.push_back(comp);
-	nextY += comp->height + COMP_PADDING;
+	nextY += comp->height + GMUtils::COMP_PADDING;
 }
 
 void GMWindow::removeComponent(GMComponent* comp) {
@@ -177,7 +181,7 @@ void GMWindow::setSize(int x, int y) {
 bool GMWindow::inWindowBar(int x, int y) {
 	int rx = x - posX;
 	int ry = y - posY;
-	return (rx >= 0 && rx <= sizeX) && (ry >= 0 && ry <= BAR_DEPTH);
+	return (rx >= 0 && rx <= sizeX) && (ry >= 0 && ry <= GMUtils::BAR_DEPTH);
 }
 
 bool GMWindow::inGrabber(int x, int y) {
@@ -186,10 +190,10 @@ bool GMWindow::inGrabber(int x, int y) {
 	int rx = x - posX;
 	int ry = y - posY;
 
-	int x1 = sizeX - GRABBER_SIZE;
+	int x1 = sizeX - GMUtils::GRABBER_SIZE;
 	int y1 = sizeY;
 	int x2 = sizeX;
-	int y2 = sizeY - GRABBER_SIZE;
+	int y2 = sizeY - GMUtils::GRABBER_SIZE;
 	int x3 = sizeX;
 	int y3 = sizeY;
 	float grabArea = GMUtils::triArea(x1, y1, x2, y2, x3, y3);
@@ -217,5 +221,5 @@ bool GMWindow::inCloser(int x, int y) {
 	int rx = x - posX;
 	int ry = y - posY;
 
-	return (rx >= sizeX - BAR_DEPTH && rx <= sizeX) && (ry >= 0 && ry <= BAR_DEPTH);
+	return (rx >= sizeX - GMUtils::BAR_DEPTH && rx <= sizeX) && (ry >= 0 && ry <= GMUtils::BAR_DEPTH);
 }
