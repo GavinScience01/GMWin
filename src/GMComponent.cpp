@@ -72,8 +72,9 @@ void GMDynamicTextComponent::render(int xOffset, int yOffset) {
 	GMUtils::renderText(pLabel->c_str(), x + xOffset, y + yOffset);
 }
 
+
 //BUTTON
-GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string text, std::string label) : GMComponent(x, y, name) {
+GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string buttonText, std::string label) : GMComponent(x, y, name) {
 	this->buttonText = buttonText;
 	this->label = label;
 	this->height = 13 * 2;

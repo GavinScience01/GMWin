@@ -17,6 +17,13 @@ GMWindow::GMWindow(const char* title, GMWindowFlags flags) {
 	nextY += BAR_DEPTH + COMP_PADDING;
 }
 
+GMWindow::~GMWindow() {
+	for (GMComponent* comp : components) {
+		delete comp;
+	}
+	delete[] &components;
+}
+
 void GMWindow::render() {
 	//TODO: add scroll bars and clipping for too many components
 

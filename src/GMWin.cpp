@@ -86,6 +86,12 @@ void GMWin::AddDynamicText(std::string* pLabel, const char* name, int x, int y) 
 	window->addComponent(comp);
 }
 
+void GMWin::AddButton(std::string buttonText, std::string label, const char* name, int x, int y) {
+	GMWindow* window = GMStorage::getInstance().currentWindow();
+	GMButtonComponent* comp = new GMButtonComponent(x, y + window->nextY, name, buttonText, label);
+	window->addComponent(comp);
+}
+
 
 //VARIABLE CHANGING
 void GMWin::setPos(int x, int y) {

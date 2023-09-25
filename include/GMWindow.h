@@ -12,6 +12,7 @@ int constexpr COMP_PADDING = 10;
 class GMWindow {
 public:
 	GMWindow(const char* title, GMWindowFlags flags);
+	~GMWindow();
 
 	const char* title;
 	GMWindowFlags flags;
@@ -38,6 +39,7 @@ public:
 
 private:
 	std::vector<GMComponent*> components;
+	GMComponent* selected;
 
 	void mouseEvent(const SDL_MouseMotionEvent& e);
 	void clickEvent(const SDL_MouseButtonEvent& e);
