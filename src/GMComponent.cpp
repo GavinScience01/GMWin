@@ -25,7 +25,7 @@ void GMTextComponent::render(int xOffset, int yOffset) {
 
 
 //CHECKBOX
-GMCheckComponent::GMCheckComponent(int x, int y, const char* name, bool checked, std::string label) : GMComponent(x, y, name) {
+GMCheckComponent::GMCheckComponent(int x, int y, const char* name, bool* checked, std::string label) : GMComponent(x, y, name) {
 	this->checked = checked;
 	this->label = label;
 	this->width = 40 + label.size() * 8;
@@ -37,7 +37,7 @@ void GMCheckComponent::render(int xOffset, int yOffset) {
 	GMUtils::renderRect(x + xOffset, y + yOffset, 30, 30);
 	GMUtils::renderText(label.c_str(), x + xOffset + 40, y + yOffset + 10);
 
-	if (checked) {
+	if (*checked) {
 		GMUtils::renderImage(x + xOffset + 5, y + yOffset + 5, 20, 20, "images/check.bmp");
 	}
 }
@@ -49,7 +49,7 @@ void GMCheckComponent::update(SDL_Event e, int xOffset, int yOffset) {
 		int ry = e.button.y - yOffset;
 
 		if (rx >= GMUtils::COMP_PADDING && rx <= 30 + GMUtils::COMP_PADDING && ry >= GMUtils::COMP_PADDING && ry <= 30 + GMUtils::COMP_PADDING) {
-			checked = !checked;
+			*checked = !(*checked);
 		}
 	}
 }
@@ -91,15 +91,19 @@ void GMDynamicTextComponent::render(int xOffset, int yOffset) {
 
 
 //BUTTON
+//due to limits brought up by passing a function, may shift components to being returned and added in between frames
 GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string buttonText, std::string label) : GMComponent(x, y, name) {
 	this->buttonText = buttonText;
 	this->label = label;
-	//TODO: width calc
-	this->height = 13 * 2;
+	this->width = 40 + (buttonText.size() * 8) + 10 + (label.size() * 8);
+	this->height = 30;
 }
 
 void GMButtonComponent::render(int xOffset, int yOffset) {
-	//TODO: this, add hover color, and rounded rect to utils
+	GMUtils::setColor(20, 40, 70, 255);
+	GMUtils::renderRect(x + xOffset, y + yOffset, width - (label.size() * 8), 30);
+	GMUtils::renderText(buttonText.c_str(), x + xOffset + 20, y + yOffset + 7);
+	GMUtils::renderText(label.c_str(), width - (label.size() * 8), y + yOffset);
 }
 
 void GMButtonComponent::update(SDL_Event e, int xOffset, int yOffset) {

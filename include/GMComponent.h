@@ -31,8 +31,8 @@ public:
 
 class GMCheckComponent : public GMComponent {
 public:
-	GMCheckComponent(int x, int y, const char* name, bool checked, std::string label);
-	bool checked;
+	GMCheckComponent(int x, int y, const char* name, bool* checked, std::string label);
+	bool* checked;
 	void render(int xOffset, int yOffset);
 	void update(SDL_Event e, int xOffset, int yOffset);
 };

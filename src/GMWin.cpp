@@ -53,8 +53,14 @@ void GMWin::Init(SDL_Window* window, SDL_Renderer* renderer) {
 }
 
 void GMWin::Begin(const char* title, GMWindowFlags flags) {
-	GMWindow* window = new GMWindow(title, flags);
-	GMStorage::getInstance().pushWindow(window);
+	GMWindow* window = GMStorage::getInstance().getWindow(title);
+	if (window == nullptr) {
+		GMWindow* w = new GMWindow(title, flags);
+		GMStorage::getInstance().pushWindow(w);
+	}
+	else {
+		GMStorage::getInstance().selectWindow(window);
+	}
 }
 
 void GMWin::End() {
@@ -76,7 +82,7 @@ void GMWin::AddText(std::string label, const char* name, int x, int y) {
 	window->addComponent(comp);
 }
 
-void GMWin::AddCheck(bool checked, std::string label, const char* name, int x, int y) {
+void GMWin::AddCheck(bool* checked, std::string label, const char* name, int x, int y) {
 	GMWindow* window = GMStorage::getInstance().currentWindow();
 	GMCheckComponent* comp = new GMCheckComponent(x, y + window->nextY, name, checked, label);
 	window->addComponent(comp);
@@ -122,11 +128,13 @@ void GMWin::TestingWindow(std::string* pLabel) {
 		grid[i][1] = .5;
 	}
 
+	bool checked;
+
 	GMWin::Begin("Testing Window");
 	GMWin::AddText("Hello World!", "hi");
-	GMWin::AddCheck(false, "This is a checkbox", "check");
+	GMWin::AddCheck(&checked, "This is a checkbox", "check");
 	GMWin::AddFloatMatrix(grid, 2, 2, "MNIST Mini", "mnist");
 	GMWin::AddDynamicText(pLabel, "height");
-	GMWin::SetTransparent(true);
+	GMWin::AddButton("Quit", " ", "quit");
 	GMWin::End();
 }
