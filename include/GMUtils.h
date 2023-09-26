@@ -15,6 +15,7 @@ namespace GMUtils {
 
 	void renderLine(int x1, int y1, int x2, int y2);
 	void renderRect(int x, int y, int w, int h);
+	void renderLineRect(int x, int y, int w, int h);
 	void renderTriangle(float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	void renderText(const char* text, int x, int y);
 	void renderImage(int x, int y, int w, int h, const char* file);

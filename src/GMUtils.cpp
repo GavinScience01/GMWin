@@ -30,6 +30,18 @@ void GMUtils::renderRect(int x, int y, int w, int h) {
 }
 
 ///<summary>
+///Draws line rect using current renderer
+///</summary>
+void GMUtils::renderLineRect(int x, int y, int w, int h) {
+	SDL_Rect rect;
+	rect.x = x;
+	rect.y = y;
+	rect.w = w;
+	rect.h = h;
+	SDL_RenderDrawRect(GMStorage::getInstance().getRenderer(), &rect);
+}
+
+///<summary>
 ///Draws a right triangle using the inputs as a hypotenuse, with the first being the bottom and last being the top (flip for inverted)
 ///</summary>
 void GMUtils::renderTriangle(float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {

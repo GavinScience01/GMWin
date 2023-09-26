@@ -21,6 +21,8 @@ namespace GMWin {
 	void Render();
 	void Update();
 
+	void SetTransparent(bool transparent);
+
 	void AddText(std::string label, const char* name, int x = 0, int y = 0);
 	void AddCheck(bool checked, std::string label, const char* name, int x = 0, int y = 0);
 	void AddFloatMatrix(float** grid, int sizeX, int sizeY, std::string label, const char* name, int x = 0, int y = 0);

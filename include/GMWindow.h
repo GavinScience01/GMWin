@@ -15,6 +15,7 @@ public:
 	int posX, posY;
 	int sizeX, sizeY, prevSize;
 	bool condensed;
+	bool transparent;
 	//for components
 	int nextY;
 

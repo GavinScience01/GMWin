@@ -62,6 +62,13 @@ void GMWin::End() {
 }
 
 
+//WINDOW SETTINGS
+void GMWin::SetTransparent(bool transparent) {
+	GMWindow* window = GMStorage::getInstance().currentWindow();
+	window->transparent = transparent;
+}
+
+
 //COMPONENT ADDING
 void GMWin::AddText(std::string label, const char* name, int x, int y) {
 	GMWindow* window = GMStorage::getInstance().currentWindow();
@@ -120,5 +127,6 @@ void GMWin::TestingWindow(std::string* pLabel) {
 	GMWin::AddCheck(false, "This is a checkbox", "check");
 	GMWin::AddFloatMatrix(grid, 2, 2, "MNIST Mini", "mnist");
 	GMWin::AddDynamicText(pLabel, "height");
+	GMWin::SetTransparent(true);
 	GMWin::End();
 }

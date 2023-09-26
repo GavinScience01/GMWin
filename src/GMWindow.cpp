@@ -13,6 +13,7 @@ GMWindow::GMWindow(const char* title, GMWindowFlags flags) {
 	sizeX = 300;
 	sizeY = 200;
 	condensed = false;
+	transparent = false;
 
 	nextY = GMUtils::BAR_DEPTH + GMUtils::COMP_PADDING;
 }
@@ -29,7 +30,12 @@ void GMWindow::render() {
 
 	//window
 	GMUtils::setColor(0, 10, 50, 255);
-	GMUtils::renderRect(posX, posY + GMUtils::BAR_DEPTH, sizeX, sizeY - GMUtils::BAR_DEPTH);
+	if (!transparent) {
+		GMUtils::renderRect(posX, posY + GMUtils::BAR_DEPTH, sizeX, sizeY - GMUtils::BAR_DEPTH);
+	}
+	else {
+		GMUtils::renderLineRect(posX, posY + GMUtils::BAR_DEPTH, sizeX, sizeY - GMUtils::BAR_DEPTH);
+	}
 
 	//grab bar, only visible if not condensed
 	//TODO: change hover color

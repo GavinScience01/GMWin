@@ -30,6 +30,15 @@ int main(int argc, char* args[]) {
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderClear(renderer);
 
+		//black rect for window transparency tests
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_Rect rect;
+		rect.x = 400;
+		rect.y = 400;
+		rect.w = 200;
+		rect.h = 200;
+		SDL_RenderFillRect(renderer, &rect);
+
 		if (GMStorage::getInstance().getWindow("Testing Window") != nullptr) {
 			label = "Current Y Size: " + std::to_string(GMStorage::getInstance().getWindow("Testing Window")->sizeY);
 		}
