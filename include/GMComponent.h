@@ -60,6 +60,8 @@ public:
 	GMButtonComponent(int x, int y, const char* name, std::string buttonText, std::string label);
 	std::string buttonText;
 	std::string label;
+	bool clicked;
+	bool hover;
 	void render(int xOffset, int yOffset);
 	void update(SDL_Event e, int xOffset, int yOffset);
 };

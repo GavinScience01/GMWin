@@ -128,11 +128,11 @@ void GMWin::TestingWindow(std::string* pLabel) {
 		grid[i][1] = .5;
 	}
 
-	bool checked;
+	bool* checked = new bool;
 
 	GMWin::Begin("Testing Window");
 	GMWin::AddText("Hello World!", "hi");
-	GMWin::AddCheck(&checked, "This is a checkbox", "check");
+	GMWin::AddCheck(checked, "This is a checkbox", "check");
 	GMWin::AddFloatMatrix(grid, 2, 2, "MNIST Mini", "mnist");
 	GMWin::AddDynamicText(pLabel, "height");
 	GMWin::AddButton("Quit", " ", "quit");

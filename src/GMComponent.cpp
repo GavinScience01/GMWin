@@ -97,15 +97,40 @@ GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string
 	this->label = label;
 	this->width = 40 + (buttonText.size() * 8) + 10 + (label.size() * 8);
 	this->height = 30;
+	this->clicked = false;
+	this->hover = false;
 }
 
 void GMButtonComponent::render(int xOffset, int yOffset) {
-	GMUtils::setColor(20, 40, 70, 255);
+	if (hover) {
+		GMUtils::setColor(10, 20, 50, 255);
+	}
+	else {
+		GMUtils::setColor(20, 40, 70, 255);
+	}
 	GMUtils::renderRect(x + xOffset, y + yOffset, width - (label.size() * 8), 30);
 	GMUtils::renderText(buttonText.c_str(), x + xOffset + 20, y + yOffset + 7);
 	GMUtils::renderText(label.c_str(), width - (label.size() * 8), y + yOffset);
 }
 
 void GMButtonComponent::update(SDL_Event e, int xOffset, int yOffset) {
+	clicked = false;
+	if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN) {
+		int rx = e.button.x - xOffset;
+		int ry = e.button.y - yOffset;
 
+		if (rx >= GMUtils::COMP_PADDING && rx <= width - (label.size() * 8) + GMUtils::COMP_PADDING && ry >= GMUtils::COMP_PADDING && ry <= 30 + GMUtils::COMP_PADDING) {
+			this->hover = true;
+			if (e.type == SDL_MOUSEBUTTONDOWN && clicked == false) {
+				clicked = true;
+				printf("hi");
+			}
+			else {
+				clicked = false;
+			}
+		}
+		else {
+			hover = false;
+		}
+	}
 }

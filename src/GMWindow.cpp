@@ -97,10 +97,8 @@ void GMWindow::update(const SDL_Event& e) {
 		textEvent(e.text);
 	}
 
-	int height = GMUtils::BAR_DEPTH;
 	for (GMComponent* comp : components) {
-		height += GMUtils::COMP_PADDING;
-		comp->update(e, posX, posY + height);
+		comp->update(e, posX, posY + comp->y - GMUtils::COMP_PADDING);
 	}
 }
 
