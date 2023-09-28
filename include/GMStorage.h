@@ -25,6 +25,7 @@ public:
 	void pushWindow(GMWindow* window);
 	GMWindow* getWindow(const char* title);
 	GMWindow* currentWindow();
+	void setCurrentWindow(GMWindow* window);
 	std::vector<GMWindow*>* getWindowStack();
 	void endWindow();
 	void queueRemove(GMWindow* win);

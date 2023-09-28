@@ -23,15 +23,15 @@ namespace GMWin {
 
 	void SetTransparent(bool transparent);
 
-	void AddText(std::string label, const char* name, int x = 0, int y = 0);
-	void AddCheck(bool* checked, std::string label, const char* name, int x = 0, int y = 0);
-	void AddFloatMatrix(float** grid, int sizeX, int sizeY, std::string label, const char* name, int x = 0, int y = 0);
-	void AddDynamicText(std::string* pLabel, const char* name, int x = 0, int y = 0);
-	void AddButton(std::string buttonText, std::string label, const char* name, int x = 0, int y = 0);
+	void Text(std::string label, const char* name, int x = 0, int y = 0);
+	void Check(bool* checked, std::string label, const char* name, int x = 0, int y = 0);
+	void FloatMatrix(float** grid, int sizeX, int sizeY, std::string label, const char* name, int x = 0, int y = 0);
+	void DynamicText(std::string* pLabel, const char* name, int x = 0, int y = 0);
+	bool Button(std::string buttonText, std::string label, const char* name, int x = 0, int y = 0);
 
 	void setPos(int posX, int posY);
 	void setSize(int sizeX, int sizeY);
 
-	void TestingWindow(std::string* pLabel);
+	void TestingWindow(std::string* pLabel, bool* checked);
 
 }

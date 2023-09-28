@@ -8,10 +8,12 @@ namespace GMUtils {
 
 	int constexpr BAR_DEPTH = 22;
 	int constexpr GRABBER_SIZE = 30;
-
 	int constexpr COMP_PADDING = 10;
 
+	SDL_Color constexpr HOVER_COLOR = { 50, 90, 110 };
+
 	void setColor(int r, int g, int b, int a);
+	void setColor(SDL_Color color);
 
 	void renderLine(int x1, int y1, int x2, int y2);
 	void renderRect(int x, int y, int w, int h);

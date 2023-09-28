@@ -14,6 +14,7 @@ GMWindow::GMWindow(const char* title, GMWindowFlags flags) {
 	sizeY = 200;
 	condensed = false;
 	transparent = false;
+	active = true;
 
 	nextY = GMUtils::BAR_DEPTH + GMUtils::COMP_PADDING;
 }
@@ -173,7 +174,7 @@ void GMWindow::removeComponent(GMComponent* comp) {
 
 GMComponent* GMWindow::getComponent(const char* name) {
 	for (int i = 0; i < components.size(); i++) {
-		if (components[i]->name = name) {
+		if (components[i]->name == name) {
 			return components[i];
 		}
 	}

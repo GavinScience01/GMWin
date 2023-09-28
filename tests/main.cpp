@@ -22,9 +22,10 @@ int main(int argc, char* args[]) {
 	SDL_CreateWindowAndRenderer(800, 800, SDL_WINDOW_OPENGL, &window, &renderer);
 
 	std::string label;
+	label = "Current Y Size:";
+	bool checked;
 
 	GMWin::Init(window, renderer);
-	GMWin::TestingWindow(&label);
 
 	while (1) {
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -38,6 +39,8 @@ int main(int argc, char* args[]) {
 		rect.w = 200;
 		rect.h = 200;
 		SDL_RenderFillRect(renderer, &rect);
+
+		GMWin::TestingWindow(&label, &checked);
 
 		if (GMStorage::getInstance().getWindow("Testing Window") != nullptr) {
 			label = "Current Y Size: " + std::to_string(GMStorage::getInstance().getWindow("Testing Window")->sizeY);

@@ -10,6 +10,10 @@ void GMUtils::setColor(int r, int g, int b, int a) {
 	SDL_SetRenderDrawColor(GMStorage::getInstance().getRenderer(), r, g, b, a);
 }
 
+void GMUtils::setColor(SDL_Color color) {
+	SDL_SetRenderDrawColor(GMStorage::getInstance().getRenderer(), color.r, color.g, color.b, color.a);
+}
+
 ///<summary>
 ///Draws a line (bruh what else)
 ///</summary>
@@ -62,7 +66,8 @@ void GMUtils::renderTriangle(float x1, float y1, float x2, float y2, Uint8 r, Ui
 ///Draws the given text to the xy coordinates
 ///</summary>
 void GMUtils::renderText(const char* text, int x, int y) {
-	//TODO: make this work
+	if (text == "") return;
+
 	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(GMStorage::getInstance().getFont(), text, { 255, 255, 255 });
 	SDL_Texture* message = SDL_CreateTextureFromSurface(GMStorage::getInstance().getRenderer(), surfaceMessage);
 	SDL_Rect rect;

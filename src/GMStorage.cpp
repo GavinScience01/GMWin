@@ -26,7 +26,7 @@ void GMStorage::setRenderer(SDL_Renderer* renderer) {
 void GMStorage::pushWindow(GMWindow* window) {
 	windowStack.push_back(window);
 	this->window = window;
-	this->selected = window;
+	selectWindow(window);
 }
 
 GMWindow* GMStorage::getWindow(const char* title) {
@@ -45,6 +45,10 @@ std::vector<GMWindow*>* GMStorage::getWindowStack() {
 
 GMWindow* GMStorage::currentWindow() {
 	return window;
+}
+
+void GMStorage::setCurrentWindow(GMWindow* window) {
+	this->window = window;
 }
 
 void GMStorage::endWindow() {

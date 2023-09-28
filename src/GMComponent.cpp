@@ -103,7 +103,7 @@ GMButtonComponent::GMButtonComponent(int x, int y, const char* name, std::string
 
 void GMButtonComponent::render(int xOffset, int yOffset) {
 	if (hover) {
-		GMUtils::setColor(10, 20, 50, 255);
+		GMUtils::setColor(GMUtils::HOVER_COLOR);
 	}
 	else {
 		GMUtils::setColor(20, 40, 70, 255);
@@ -123,7 +123,6 @@ void GMButtonComponent::update(SDL_Event e, int xOffset, int yOffset) {
 			this->hover = true;
 			if (e.type == SDL_MOUSEBUTTONDOWN && clicked == false) {
 				clicked = true;
-				printf("hi");
 			}
 			else {
 				clicked = false;
